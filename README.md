@@ -88,16 +88,12 @@ Handles:
 - Web server + WebSocket dashboard  
 
 ### **2. SmartSound.ino**
+File: SmartSound.ino
 Enhanced version with:
 - Smarter noise filtering  
 - Improved threshold logic  
 - Frequency smoothing  
 - Modularized DSP code  
-- (Optional) hooks for AI-based sound classification  
-
-> Store `SmartSound.ino` in the same project folder or `/src/`.
-
----
 
 ## 🔧 Installation & Setup
 
@@ -105,7 +101,5 @@ Enhanced version with:
 2. Open `SoundAnalyzer.ino` or `SmartSound.ino` in Arduino IDE  
 3. Install required libraries from Library Manager  
 4. Enter your WiFi credentials:
-
-```cpp
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
+  const char* ssid = "YOUR_SSID";
+  const char* password = "YOUR_PASSWORD";
