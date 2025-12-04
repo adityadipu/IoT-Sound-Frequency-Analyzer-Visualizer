@@ -1,54 +1,111 @@
-# ESP8266 IoT Sound Frequency Analyzer & Visualizer
+# 🧠🔊 ESP8266 SmartSound – IoT Audio Frequency Analyzer & Visualizer
 
-An IoT-based sound monitoring system that visualizes audio data in real-time using an ESP8266 NodeMCU and a Web Interface. This project captures audio via a KY-037 microphone, performs signal processing, and displays the waveform, sound level, and dominant frequency on a responsive web dashboard.
+An advanced **IoT-powered real-time sound monitoring system** built using the **ESP8266 NodeMCU**, capable of analyzing sound intensity, waveform patterns, and dominant frequencies—displayed live on a responsive web dashboard.
+
+This system captures audio signals using the **KY-037 high-sensitivity microphone**, performs onboard signal processing, and presents the results over WiFi through a fully interactive web interface.
+
+---
 
 ## 📸 Project Demo
-![Dashboard View](images/image_f2c4db.jpg)
-*Real-time dashboard showing Sound Level (39%), Live Waveform, and LED controls.*
 
-## 🚀 Features
-* **Real-Time Visualization:** Live waveform plotting using WebSockets.
-* **Frequency Analysis:** Calculates and displays the dominant frequency (Hz).
-* **Remote Control:** Control LED brightness and sound threshold sensitivity via the web UI.
-* **Responsive Dashboard:** Custom HTML/CSS/JS interface hosted directly on the ESP8266.
-* **Dual Mode Sensing:** Utilizes both Analog (A0) for waveform and Digital (D0) for threshold triggers.
+### **Web Dashboard (Real-Time Visualization)**
+![Dashboard View](images/WhatsApp Image 2025-12-03 at 23.23.35_9848a74c.jpg)  
+*Live waveform, sound level, dominant frequency, and LED control panel.*
+
+### **Physical Hardware Setup**
+![Hardware Setup](images/WhatsApp Image 2025-12-03 at 23.23.57_7f276179.jpg)  
+*Actual prototype showing NodeMCU, KY-037 mic module, and LED output.*
+
+---
+
+## 🚀 Key Features
+
+- 🔄 **Real-Time Waveform Visualization** via WebSockets for ultra-responsive plotting  
+- 📡 **Frequency Detection Engine** to compute and display dominant audio frequencies (Hz)  
+- 💡 **Remote LED Control**—brightness and threshold-based activation  
+- 📊 **Sound Level Indicator** with automatic scaling  
+- 📱 **Full Web Dashboard** (HTML/CSS/JS) served directly from ESP8266  
+- 🔔 **Dual-Mode Microphone Support**  
+  - Analog (A0) → waveform + amplitude  
+  - Digital (D0) → threshold interrupts  
+- ⚡ Lightweight, fast, and optimized for continuous monitoring  
+
+---
 
 ## 🛠️ Hardware Components
-* **Microcontroller:** ESP8266 NodeMCU (Lolin V3)
-* **Sensor:** KY-037 Microphone Module (High Sensitivity)
-* **Actuator:** LED (Green) + 220Ω Resistor
-* **Breadboard & Jumper Wires**
+
+| Component | Description |
+|----------|-------------|
+| ESP8266 NodeMCU (Lolin V3) | WiFi-enabled microcontroller & web server |
+| KY-037 Microphone Module | High-sensitivity sound sensor |
+| LED (Green) | Visual output indicator |
+| 220Ω Resistor | Current limiting for LED |
+| Breadboard & Jumper Wires | For prototyping |
+
+---
 
 ## 🔌 Circuit Diagram
-The system connects the Microphone analog output to the ESP8266 ADC for sampling, and the digital output for hardware interrupts.
 
-![Circuit Schematic](images/ckt2.jpg)
+The KY-037 microphone feeds both **analog audio** and **digital threshold** outputs into the NodeMCU. The LED is driven by a GPIO pin for brightness control.
+
+### **Circuit Images**
+![Circuit Schematic](images/ckt2.jpg)  
 ![Wiring Diagram](images/ckt.jpg)
 
-### Pinout Configuration:
-| Component | Pin | ESP8266 NodeMCU Pin |
-| :--- | :--- | :--- |
-| **KY-037** | A0 | A0 (ADC0) |
-| **KY-037** | D0 | D1 (GPIO 5) |
-| **KY-037** | VCC | 3V3 (VU) |
-| **KY-037** | GND | GND |
-| **LED** | Anode (+) | D2 (GPIO 4) |
+### **Pinout Configuration**
+
+| Component | Pin | ESP8266 Pin |
+|----------|-----|--------------|
+| KY-037 | A0 | A0 (ADC0) |
+| KY-037 | D0 | D1 (GPIO 5) |
+| KY-037 | VCC | 3V3 |
+| KY-037 | GND | GND |
+| LED | Anode (+) | D2 (GPIO 4) |
+
+---
 
 ## 💻 Software & Libraries
-* **Framework:** Arduino IDE
-* **Key Libraries:**
-    * `ESP8266WiFi.h` (Connectivity)
-    * `ESPAsyncWebServer.h` (Web Interface)
-    * `arduinoFFT.h` (Optional: If used for frequency calculation)
+
+### Development Environment
+- Arduino IDE
+
+### Required Libraries
+- `ESP8266WiFi.h` – WiFi connectivity  
+- `ESPAsyncWebServer.h` – async web server  
+- `WebSocketsServer.h` – real-time WebSocket communication  
+- `arduinoFFT.h` – optional for FFT-based frequency detection  
+
+---
+
+## 📂 Included Source Files
+
+### **1. SoundAnalyzer.ino**
+Handles:
+- Audio sampling  
+- Level calculation  
+- Waveform streaming  
+- LED control logic  
+- Web server + WebSocket dashboard  
+
+### **2. SmartSound.ino**
+Enhanced version with:
+- Smarter noise filtering  
+- Improved threshold logic  
+- Frequency smoothing  
+- Modularized DSP code  
+- (Optional) hooks for AI-based sound classification  
+
+> Store `SmartSound.ino` in the same project folder or `/src/`.
+
+---
 
 ## 🔧 Installation & Setup
-1.  Clone this repository.
-2.  Open `SoundAnalyzer.ino` in Arduino IDE.
-3.  Install the required libraries via Library Manager.
-4.  Update the `ssid` and `password` variables with your WiFi credentials.
-5.  Upload the code to the NodeMCU.
-6.  Open the Serial Monitor (115200 baud) to find the IP address.
-7.  Type the IP address in your browser to access the dashboard.
 
-## 🤝 Contributing
-Feel free to submit pull requests or open issues to improve the signal processing algorithms or UI!
+1. Clone this repository  
+2. Open `SoundAnalyzer.ino` or `SmartSound.ino` in Arduino IDE  
+3. Install required libraries from Library Manager  
+4. Enter your WiFi credentials:
+
+```cpp
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASSWORD";
